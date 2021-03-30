@@ -38,14 +38,21 @@
         $result_array = array();
 
         if ($result->num_rows > 0) {
-
+            
             while($row = $result->fetch_assoc() and $count < 100) {
+                $sql2 = "SELECT to_url, COUNT(to_url) as 'c' FROM connections WHERE to_url = '" . $row["url"] . "' GROUP BY to_url";
+                $result2 = $conn->query($sql2);
+                $row["c"] = $result2->fetch_row()[1];
                 array_push($result_array, $row);
                 $count += 1;
             }
-
+            
+            usort($result_array, function($a, $b) {
+                return $b['c'] <=> $a['c'];
+            });
+            
             foreach ($result_array as $row) {
-                echo "<div>" . $row["title"]. "<br> <a href=http://" . $row["url"] . "> http://" . $row["url"]. "</a></div><br>";
+                echo "<div>" . $row["title"]. "<br> <a class='result_link' href=http://" . $row["url"] . "> http://" . $row["url"]. "</a></div><br>";
             }
 
         } else {
