@@ -12,3 +12,5 @@ A simple search engine implementation using a Python web crawler, SQL Database, 
 6. Host the "search.html" and "query.php" scripts on a web server
 7. Test it out and tweak your very own search engine!
 
+More info here: [https://www.pixeled.site/pages/search.php](https://www.pixeled.site/pages/search.php)
+
